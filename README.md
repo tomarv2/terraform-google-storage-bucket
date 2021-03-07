@@ -133,4 +133,13 @@ Please refer to examples directory [link](examples) for references.
 | storage\_bucket\_name | Storage bucket name |
 | storage\_bucket\_url | Storage bucket url |
 
+## Permissions
 
+Service account with the following roles is required:
+
+- [`roles/storage.admin`](https://cloud.google.com/iam/docs/understanding-roles#cloud-storage-roles)
+
+## Project APIs
+
+Following APIs must be enabled on the project:
+- `storage-api.googleapis.com`
