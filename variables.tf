@@ -7,16 +7,17 @@ variable "prjid" {
 }
 
 variable "gcp_project" {
-  description = "Name of the GCP project"
+  description = "The ID of the project to create the bucket in."
 }
 
 variable "gcp_region" {
-  default = "us-central1"
+  description = "Location where this resources should be created"
+  default     = "us-central1"
 }
 
 variable "uniform_bucket_level_access" {
   description = "Enables Uniform bucket-level access access to a bucket."
-  default     = false
+  default     = true
 }
 
 variable "force_destroy" {
@@ -24,14 +25,84 @@ variable "force_destroy" {
   default     = false
 }
 
-//variable "versioning" {
-//  description = "Optional map of lowercase unprefixed name => boolean, defaults to false."
-//  type        = map
-//  default     = {}
-//}
-//
-//variable "website" {
-//  type        = any
-//  default     = {}
-//  description = "Map of website values. Supported attributes: main_page_suffix, not_found_page"
-//}
+variable "versioning" {
+  description = "Versioning should be enabled or disabled on bucket"
+  default     = false
+}
+
+variable "website" {
+  type        = any
+  default     = {}
+  description = "Map of website values. Supported attributes: main_page_suffix, not_found_page"
+}
+
+variable "retention_policy" {
+  description = "Configuration of the bucket's data retention policy for how long objects in the bucket should be retained."
+  type = object({
+    is_locked        = bool
+    retention_period = number
+  })
+  default = null
+}
+
+variable "encryption" {
+  description = "A Cloud KMS key that will be used to encrypt objects inserted into this bucket"
+  type = object({
+    default_kms_key_name = string
+  })
+  default = null
+}
+
+variable "index_page" {
+  description = "Bucket's directory index"
+  type        = string
+  default     = "index.html"
+}
+
+variable "not_found_page" {
+  description = "The custom object to return when a requested resource is not found"
+  type        = string
+  default     = "404.html"
+}
+
+variable "enable_cors" {
+  description = "Set to true if you want to enable CORS headers"
+  type        = bool
+  default     = false
+}
+
+variable "cors_origins" {
+  description = "List of Origins eligible to receive CORS response headers. Note: '*' is permitted in the list of origins, and means 'any Origin'"
+  type        = list(string)
+  default     = []
+}
+
+variable "cors_methods" {
+  description = "list of HTTP methods on which to include CORS response headers, (GET, OPTIONS, POST, etc). Note: '*' is permitted in the list of methods, and means 'any method'"
+  type        = list(string)
+  default     = []
+}
+
+variable "cors_extra_headers" {
+  description = "List of HTTP headers other than the simple response headers to give permission for the user-agent to share across domains"
+  type        = list(string)
+  default     = []
+}
+
+variable "cors_max_age_seconds" {
+  description = "The value, in seconds, to return in the Access-Control-Max-Age header used in preflight responses"
+  type        = number
+  default     = 600
+}
+
+variable "enable_website" {
+  description = "Set to true if you want to enable CORS headers"
+  type        = bool
+  default     = false
+}
+
+variable "deploy_bucket" {
+  description = "feature flag, true or false"
+  default     = true
+  type        = bool
+}
