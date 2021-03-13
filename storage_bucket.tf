@@ -1,7 +1,8 @@
 resource "google_storage_bucket" "bucket" {
 
   count                       = var.deploy_bucket ? 1 : 0
-  name                        = "${var.teamid}-${var.prjid}"
+
+  name                        = var.bucket_name != null ? var.bucket_name : "${var.teamid}-${var.prjid}"
   location                    = var.gcp_region
   force_destroy               = var.force_destroy
   project                     = var.gcp_project

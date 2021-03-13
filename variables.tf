@@ -106,3 +106,8 @@ variable "deploy_bucket" {
   default     = true
   type        = bool
 }
+
+variable "bucket_name" {
+  description = "Google storage bucket name"
+  default = null
+}
