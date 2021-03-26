@@ -17,6 +17,11 @@
 
 # Terraform module to create Google Storage Bucket
 
+> :arrow_right:  Terraform module for [AWS S3](https://registry.terraform.io/modules/tomarv2/s3/aws/latest)
+
+> :arrow_right:  Terraform module for [Azure Storage Account](https://registry.terraform.io/modules/tomarv2/storage-account/azure/latest)
+
+
 # Versions
 
 - Module tested for Terraform 0.14.
@@ -49,21 +54,21 @@ export TF_GCLOUD_BUCKET=<remote state bucket name>
 export TF_GCLOUD_CREDENTIALS=<gcp credentials.json>
 ```  
 
-- Make required change to `examples` directory
+- Make required change to `examples` directory.
 
 - Run and verify the output before deploying:
 ```
-tf -cloud gcloud plan 
+tf -cloud gcloud plan -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to deploy:
 ```
-tf -cloud gcloud apply 
+tf -cloud gcloud apply -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to destroy:
 ```
-tf -cloud gcloud destroy
+tf -cloud gcloud destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
 > ❗️ **Important** - Two variables are required for using `tf` package:
@@ -104,18 +109,20 @@ Please refer to examples directory [link](examples) for references.
 | Name | Version |
 |------|---------|
 | terraform | >= 0.14 |
-| google | ~> 3.58 |
+| google | ~> 3.60 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | ~> 3.58 |
+| google | ~> 3.60 |
+| random | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| bucket\_name | Google storage bucket name | `any` | `null` | no |
 | cors\_extra\_headers | List of HTTP headers other than the simple response headers to give permission for the user-agent to share across domains | `list(string)` | `[]` | no |
 | cors\_max\_age\_seconds | The value, in seconds, to return in the Access-Control-Max-Age header used in preflight responses | `number` | `600` | no |
 | cors\_methods | list of HTTP methods on which to include CORS response headers, (GET, OPTIONS, POST, etc). Note: '\*' is permitted in the list of methods, and means 'any method' | `list(string)` | `[]` | no |
