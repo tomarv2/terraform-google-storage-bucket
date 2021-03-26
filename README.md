@@ -25,7 +25,7 @@
 # Versions
 
 - Module tested for Terraform 0.14.
-- Google provider version [3.58.0](https://registry.terraform.io/providers/hashicorp/google/latest)
+- Google provider version [3.60.0](https://registry.terraform.io/providers/hashicorp/google/latest)
 - `main` branch: Provider versions not pinned to keep up with Terraform releases
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-google-storage-bucket/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-google-storage-bucket" /></a> in your releases)
@@ -84,7 +84,7 @@ tf -cloud gcloud destroy -var='teamid=foo' -var='prjid=bar'
 >
 > For more information refer to [Terraform documentation](https://www.terraform.io/docs/language/values/variables.html)
 
-##### Storage Bucket(with optional enable website)
+#### Storage Bucket(with optional enable website)
 ```
 module "storage_bucket" {
   source = "../"
