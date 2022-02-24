@@ -1,39 +1,41 @@
 variable "teamid" {
-  description = "(Required) Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  description = "Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  type        = string
 }
 
 variable "prjid" {
-  description = "(Required) Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
-}
-
-variable "gcp_project" {
-  description = "The ID of the project to create the bucket in."
+  description = "Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
+  type        = string
 }
 
 variable "gcp_region" {
   description = "Location where this resources should be created"
+  type        = string
   default     = "us-central1"
+}
+
+variable "multi_region" {
+  description = "Location where this resources should be created"
+  type        = string
+  default     = null
 }
 
 variable "uniform_bucket_level_access" {
   description = "Enables Uniform bucket-level access access to a bucket."
+  type        = bool
   default     = true
 }
 
 variable "force_destroy" {
   description = "When deleting a bucket, this boolean option will delete all contained objects. If you try to delete a bucket that contains objects, Terraform will fail that run."
+  type        = bool
   default     = false
 }
 
 variable "versioning" {
   description = "Versioning should be enabled or disabled on bucket"
+  type        = bool
   default     = false
-}
-
-variable "website" {
-  type        = any
-  default     = {}
-  description = "Map of website values. Supported attributes: main_page_suffix, not_found_page"
 }
 
 variable "retention_policy" {
@@ -109,7 +111,8 @@ variable "deploy_bucket" {
 
 variable "bucket_name" {
   description = "Google storage bucket name"
-  default = null
+  type        = string
+  default     = null
 }
 
 resource "random_string" "naming" {
@@ -120,4 +123,10 @@ resource "random_string" "naming" {
 
 locals {
   suffix = random_string.naming.result
+}
+
+variable "custom_labels" {
+  type        = any
+  description = "Extra custom labels"
+  default     = null
 }
