@@ -1,7 +1,10 @@
+provider "google" {
+  region = var.region
+}
+
 module "storage_bucket" {
   source = "../../"
 
-  gcp_project                 = "demo-1000"
   uniform_bucket_level_access = true
   versioning                  = false
   enable_website              = true  # NOTE: enable_website and enable_cors go togeather

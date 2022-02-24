@@ -8,12 +8,6 @@ variable "prjid" {
   type        = string
 }
 
-variable "gcp_region" {
-  description = "Location where this resources should be created"
-  type        = string
-  default     = "us-central1"
-}
-
 variable "multi_region" {
   description = "Location where this resources should be created"
   type        = string
