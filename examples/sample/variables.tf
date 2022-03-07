@@ -13,3 +13,8 @@ variable "region" {
   type        = string
   default     = "us-central1"
 }
+
+variable "project" {
+  description = "GCP project to deploy resources"
+  type        = string
+}

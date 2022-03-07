@@ -1,12 +1,14 @@
+data "google_compute_regions" "available" {}
+
 resource "google_storage_bucket" "bucket" {
 
   count = var.deploy_bucket ? 1 : 0
 
   name                        = var.bucket_name != null ? var.bucket_name : "${var.teamid}-${var.prjid}-${local.suffix}"
-  location                    = var.multi_region != null ? var.multi_region : var.gcp_region
+  location                    = var.multi_region != null ? var.multi_region : data.google_compute_regions.available.names[count.index]
   force_destroy               = var.force_destroy
   uniform_bucket_level_access = var.uniform_bucket_level_access
-  tags                        = var.custom_labels != null ? merge(var.custom_labels, local.shared_labels) : merge(local.shared_labels)
+  labels                      = var.custom_labels != null ? merge(var.custom_labels, local.shared_labels) : merge(local.shared_labels)
 
   versioning {
     enabled = var.versioning
