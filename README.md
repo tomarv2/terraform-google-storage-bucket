@@ -13,14 +13,14 @@
         <img src="https://img.shields.io/twitter/follow/varuntomar2019?style=social&logo=twitter"></a>
 </p>
 
-# Terraform module to create Google Storage Bucket
+## Terraform module for Google Storage Bucket
 
 > :arrow_right:  Terraform module for [AWS S3](https://registry.terraform.io/modules/tomarv2/s3/aws/latest)
 
 > :arrow_right:  Terraform module for [Azure Storage Account](https://registry.terraform.io/modules/tomarv2/storage-account/azure/latest)
 
 
-## Versions
+### Versions
 
 - Module tested for Terraform 1.0.1.
 - GCP provider version [4.12.0](https://registry.terraform.io/providers/hashicorp/google/latest).
@@ -28,9 +28,9 @@
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-google-storage-bucket/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-google-storage-bucket" /></a>).
 
-## Usage
+### Usage
 
-### Option 1:
+#### Option 1:
 
 ```
 terrafrom init
@@ -40,9 +40,9 @@ terraform destroy -var='teamid=tryme' -var='prjid=project1'
 ```
 **Note:** With this option please take care of remote state storage
 
-### Option 2:
+#### Option 2:
 
-#### Recommended method (stores remote state in S3 using `prjid` and `teamid` to create directory structure):
+##### Recommended method (stores remote state in remote backend(S3,  Azure storage, or Google bucket) using `prjid` and `teamid` to create directory structure):
 
 - Create python 3.8+ virtual environment
 ```
@@ -78,12 +78,8 @@ tf -c=gcloud apply -var='teamid=foo' -var='prjid=bar'
 tf -c=gcloud destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
-**NOTE:**
-
-- Read more on [tfremote](https://github.com/tomarv2/tfremote)
----
-
-#### Storage bucket
+**Note:** Read more on [tfremote](https://github.com/tomarv2/tfremote)
+##### Storage bucket
 ```
 terraform {
   required_version = ">= 1.0.1"
@@ -115,6 +111,7 @@ module "storage_bucket" {
 
 Please refer to examples directory [link](examples) for references.
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -152,7 +149,7 @@ No modules.
 | <a name="input_cors_methods"></a> [cors\_methods](#input\_cors\_methods) | list of HTTP methods on which to include CORS response headers, (GET, OPTIONS, POST, etc). Note: '*' is permitted in the list of methods, and means 'any method' | `list(string)` | `[]` | no |
 | <a name="input_cors_origins"></a> [cors\_origins](#input\_cors\_origins) | List of Origins eligible to receive CORS response headers. Note: '*' is permitted in the list of origins, and means 'any Origin' | `list(string)` | `[]` | no |
 | <a name="input_custom_labels"></a> [custom\_labels](#input\_custom\_labels) | Extra custom labels | `any` | `null` | no |
-| <a name="input_deploy_bucket"></a> [deploy\_bucket](#input\_deploy\_bucket) | feature flag, true or false | `bool` | `true` | no |
+| <a name="input_deploy_bucket"></a> [deploy\_bucket](#input\_deploy\_bucket) | Feature flag, true or false | `bool` | `true` | no |
 | <a name="input_enable_cors"></a> [enable\_cors](#input\_enable\_cors) | Set to true if you want to enable CORS headers | `bool` | `false` | no |
 | <a name="input_enable_website"></a> [enable\_website](#input\_enable\_website) | Set to true if you want to enable CORS headers | `bool` | `false` | no |
 | <a name="input_encryption"></a> [encryption](#input\_encryption) | A Cloud KMS key that will be used to encrypt objects inserted into this bucket | <pre>object({<br>    default_kms_key_name = string<br>  })</pre> | `null` | no |
@@ -176,3 +173,4 @@ No modules.
 | <a name="output_storage_bucket_storage_class"></a> [storage\_bucket\_storage\_class](#output\_storage\_bucket\_storage\_class) | Storage bucket class |
 | <a name="output_storage_bucket_url"></a> [storage\_bucket\_url](#output\_storage\_bucket\_url) | Storage bucket url |
 | <a name="output_storage_bucket_website"></a> [storage\_bucket\_website](#output\_storage\_bucket\_website) | URL of the website |
+<!-- END_TF_DOCS -->
